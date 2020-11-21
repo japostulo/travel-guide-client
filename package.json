@@ -7,10 +7,12 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "autoprefixer": "^10.0.2",
+    "autoprefixer": "^9.8.6",
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
-    "postcss": "^8.1.8",
-    "tailwindcss": "^2.0.1",
+    "dotenv": "^8.2.0",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
