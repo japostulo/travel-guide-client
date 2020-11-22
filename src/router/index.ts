@@ -2,35 +2,60 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import { nextTick } from 'vue/types/umd'
 import Home from '../views/Home.vue'
+import Travel from '../views/Teste.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: 'Login'
+    component: Home,
+    children: [
+      {
+        path: '',
+        redirect: '/home'
+      },
+      {
+        path: 'Home',
+        components:{
+          default: Home,
+          content: () => import(/*webpackChunkName: "Travel"*/ '@/views/Travel.vue')
+        }
+      },
+      {
+        path: 'myTravel',
+        components: {
+          default: Home,
+          content: () => import(/*webpackChunkName: "Travel"*/ '@/views/MyTravel.vue')
+        }
+      }
+
+      // {
+      //   path: 'home',
+      //   name: 'home',
+      //   components: {
+      //     default: Home,
+      //     content: Travel
+      //   },
+      //   beforeEnter: (to, from, next) => {
+      //     if (localStorage.token == null) {
+      //       next({
+      //         path: '/Login',
+      //         query: {redirect: to.fullPath}
+      //       })
+      //       return false
+      //     }
+      //     next()
+      //   }
+      // },
+
+    ],
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import(/*webpackChunkName: 'Login'*/ '../views/Login.vue'),
   },
-  {
-    path: '/travel',
-    name: 'Travel',
-    component: () => import(/*webChunkName: 'Travel' */ '../views/Travel.vue'),
-    beforeEnter: (to, from, next) => {
-      if (localStorage.token == null) {
-        next({
-          path: '/Login',
-          query: {redirect: to.fullPath}
-        })
-        return false
-      }
-      next()
-    }
-    
-  }
 ]
 
 const router = new VueRouter({
