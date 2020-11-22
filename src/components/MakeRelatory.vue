@@ -35,7 +35,7 @@
                 {{travel.km}}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-                {{travel.value}}
+                {{travel.value}} R$
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
 

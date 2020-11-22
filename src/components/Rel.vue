@@ -64,13 +64,12 @@ export default {
     },
     methods: {
         save() {
-            console.log(JSON.parse(localStorage.user).id)
             this.$axios.post('/api/travel/', {
                 "user_id": JSON.parse(localStorage.user).id,
                 "from_id": this.from.id,
                 "to_id": this.to.id,
                 "km": this.distance,
-                "value": parseFloat(this.value),
+                "value": this.value,
             })
                 .then(res => {
                     this.$emit('toggle', true)
