@@ -46,7 +46,7 @@ export default {
                         localStorage.token = res.data.token
                         localStorage.user = JSON.stringify(res.data.user)
                         this.$axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.token}`;
-                        this.$router.push('/travel')
+                        this.$router.push('/home')
                     })
                     .catch(err => {
                         this.error = err  
