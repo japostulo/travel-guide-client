@@ -13,7 +13,7 @@ const routes: Array<RouteConfig> = [
     children: [
       {
         path: '',
-        redirect: '/home'
+        redirect: '/login'
       },
       {
         path: 'Home',
