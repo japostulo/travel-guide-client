@@ -39,20 +39,24 @@ export default {
     },
     methods: {
         login() {
+            this.error = ''
             this.$axios('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/login', {email: this.email, password: this.password})
                     .then((res) => {
-                        this.$emit('update:user', res.data.user)
                         localStorage.token = res.data.token
                         localStorage.user = JSON.stringify(res.data.user)
                         this.$axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.token}`;
                         this.$router.push('/home')
                     })
                     .catch(err => {
-                        this.error = err  
+                        this.error = 'Usuário ou senha inválido'  
                     })
             })
-            
+        }
+    },
+    created(){
+        if (this.$route.query.expired) {
+            alert('Usuário não autenticado, por favor faça login')
         }
     }
 }

@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import { nextTick } from 'vue/types/umd'
 import Home from '../views/Home.vue'
 import Travel from '../views/Teste.vue'
+import {authentication} from '@/auth/Authentication'
 
 Vue.use(VueRouter)
 
@@ -19,8 +20,8 @@ const routes: Array<RouteConfig> = [
         path: 'Home',
         components:{
           default: Home,
-          content: () => import(/*webpackChunkName: "Travel"*/ '@/views/Travel.vue')
-        }
+          content: () => import(/*webpackChunkName: "Travel"*/ '@/views/Travel.vue'),
+        },
       },
       {
         path: 'myTravel',
@@ -50,6 +51,9 @@ const routes: Array<RouteConfig> = [
       // },
 
     ],
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: '/login',
@@ -62,6 +66,10 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  authentication(to, next);
 })
 
 export default router
